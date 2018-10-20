@@ -7,9 +7,7 @@ typedef struct node
 	struct node* next;
 } node;
 
-
-int addElement(node** head);
-int remElement(node** head);
-
+node* addElement(node** head, node* newNode);
+node* deleteElement(node** head);
 
 #endif /* LINKEDLIST_H */

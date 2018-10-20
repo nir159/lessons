@@ -16,3 +16,16 @@ node* addElement(node** head, node* newNode) {
 	(*head) = newNode;
 	return *head;
 }
+
+/*
+Function removes the list head
+Input:
+head - the list head
+Output:
+the new head of the list
+*/
+node* deleteElement(node** head)
+{
+	(*head) = (*head)->next;
+	return *head;
+}

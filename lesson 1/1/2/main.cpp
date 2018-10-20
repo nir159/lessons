@@ -6,19 +6,20 @@
 int main(int argc, char** argv)
 {
 	int i = 0;
-	node* a = new node();
-	node* b = new node();
-	node* c = new node();
-	a->value = 1;
-	b->value = 2;
-	c->value = 3;
-	a->next = b;
-	addElement();
-	/*std::cout << dequeue(q) << "\n";
-	for (i = 0; i < q->size; i++) {
-		std::cout << "the number in place " << i << " is " << q->values[i] << "\n";
-	}*/
-	delete(a,b,c);
+	node* head = new node();
+	head->next = new node();
+	node* n = new node();
+	head->value = 2;
+	head->next->value = 3;
+	n->value = 1;
+	head = addElement(&head, n);
+	std::cout << "n is " << head->value << "\n";
+	head = deleteElement(&head);
+	std::cout << "n is " << head->value;
+	
+	delete(head);
+	delete(head->next);
+	delete(head->next->next);
 	getchar();
 	return 0;
 }

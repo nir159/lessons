@@ -73,7 +73,7 @@ the top element or -1 if empty
 int dequeue(queue* q) {
 	unsigned int i = 0, flag = 1;
 	int value = -1;
-	if (!(isEmpty(q))) {
+	if (isEmpty(q)) {
 		while (i < (q->size) && flag) {
 			if (q->values[i] != NULL) {
 				value = q->values[i];

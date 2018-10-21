@@ -14,7 +14,7 @@ void push(stack* s, unsigned int element) {
 	node* curr = s->head;
 	node* newNode = new node();
 	newNode->value = element;
-	if (curr->value) {
+	if (curr->value) { // if head exists
 		while (curr->next->value) {
 			curr = curr->next;
 		}
@@ -39,12 +39,12 @@ the value of the last element or -1 if list is empty
 int pop(stack* s) {
 	node* curr = s->head;
 	int value = -1;
-	if (curr->value) {
+	if (curr->value) { // if head exists
 		if (curr->next->value) {
 			while (curr->next->next->value) {
 				curr = curr->next;
 			}
-			value = curr->next->value;
+			value = curr->next->value; // keep the value to return
 			delete(curr->next);
 			curr->next = new node();
 			curr->next->value = 0;
@@ -77,7 +77,7 @@ s - the stack
 */
 void cleanStack(stack* s) {
 	while (s->head) {
-		pop(s);
+		pop(s); // removes all the elements
 	}
-	initStack(s);
+	initStack(s); // initialize the stack
 }

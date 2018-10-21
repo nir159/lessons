@@ -3,6 +3,7 @@
 #include <cstddef>
 #include "linkedList.h"
 #include "stack.h"
+#include "utils.h"
 
 int main(int argc, char** argv)
 {
@@ -20,7 +21,7 @@ int main(int argc, char** argv)
 	
 	delete(head);
 	delete(head->next);
-	delete(head->next->next);*/
+	delete(head->next->next);
 	stack* s = new stack;
 	initStack(s);
 	s->head->value = 2;
@@ -29,7 +30,13 @@ int main(int argc, char** argv)
 	push(s, 7);
 	pop(s);
 	push(s, 9);
-	cleanStack(s);
+	cleanStack(s);*/
+	int* nums = new int[3];
+	nums[0] = 1;
+	nums[1] = 2;
+	nums[2] = 3;
+	reverse(nums, 3);
+	std::cout << "new array is " << nums[0] << nums[1] << nums[2] << "\n";
 	getchar();
 	return 0;
 }

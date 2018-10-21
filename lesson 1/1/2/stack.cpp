@@ -79,4 +79,5 @@ void cleanStack(stack* s) {
 	while (s->head) {
 		pop(s);
 	}
+	initStack(s);
 }

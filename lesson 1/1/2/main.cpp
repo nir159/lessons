@@ -8,6 +8,7 @@
 int main(int argc, char** argv)
 {
 	int i = 0;
+	int* nums = NULL;
 	/*node* head = new node();
 	head->next = new node();
 	node* n = new node();
@@ -18,7 +19,6 @@ int main(int argc, char** argv)
 	std::cout << "n is " << head->value << "\n";
 	head = deleteElement(&head);
 	std::cout << "n is " << head->value;
-	
 	delete(head);
 	delete(head->next);
 	delete(head->next->next);
@@ -30,13 +30,17 @@ int main(int argc, char** argv)
 	push(s, 7);
 	pop(s);
 	push(s, 9);
-	cleanStack(s);*/
-	int* nums = new int[3];
+	cleanStack(s);
 	nums[0] = 1;
 	nums[1] = 2;
 	nums[2] = 3;
 	reverse(nums, 3);
-	std::cout << "new array is " << nums[0] << nums[1] << nums[2] << "\n";
+	std::cout << "new array is " << nums[0] << nums[1] << nums[2] << "\n";*/
+	nums = reverse10();
+	for (i = 0; i < 10; i++) {
+		std::cout << "the number in position " << i << " is " << nums[i] << "\n";
+	}
+	getchar();
 	getchar();
 	return 0;
 }

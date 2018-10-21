@@ -14,14 +14,18 @@ void push(stack* s, unsigned int element) {
 	node* curr = s->head;
 	node* newNode = new node();
 	newNode->value = element;
-	if (curr) {
-		while (curr->next) {
+	if (curr->value) {
+		while (curr->next->value) {
 			curr = curr->next;
 		}
 		curr->next = newNode;
+		newNode->next = new node();
+		newNode->next->value = 0;
 	}
 	else {
 		curr->value = element;
+		curr->next = new node();
+		curr->next->value = 0;
 	}
 }
 
@@ -29,16 +33,29 @@ void push(stack* s, unsigned int element) {
 Function removes last element in list
 input:
 s - the stack
+output:
+the value of the last element or -1 if list is empty
 */
 int pop(stack* s) {
 	node* curr = s->head;
-	if (curr && curr->next) {
-		while (curr->next->next) {
-			curr = curr->next;
+	int value = -1;
+	if (curr->value) {
+		if (curr->next->value) {
+			while (curr->next->next->value) {
+				curr = curr->next;
+			}
+			value = curr->next->value;
+			delete(curr->next);
+			curr->next = new node();
+			curr->next->value = 0;
 		}
-		delete(curr->next);
-		curr->next = NULL;
+		else {
+			value = s->head->value;
+			delete(s->head);
+			s->head = NULL;
+		}
 	}
+	return value;
 }
 
 /*
@@ -48,6 +65,9 @@ s - the stack
 */
 void initStack(stack* s) {
 	s->head = new node;
+	s->head->value = 0;
+	s->head->next = new node();
+	s->head->next->value = 0;
 }
 
 /*

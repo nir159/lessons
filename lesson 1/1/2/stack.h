@@ -4,7 +4,7 @@
 /* a positive-integer value stack, with no size limit */
 typedef struct stack
 {
-
+	node* head = NULL;
 } stack;
 
 void push(stack* s, unsigned int element);

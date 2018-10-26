@@ -30,6 +30,8 @@ public:
 
 	// functions
 	std::string get_RNA_transcript(const Gene& gene) const;
+	std::string get_reversed_DNA_strand() const;
+	unsigned int get_num_of_codon_appearances(const std::string& codon) const;
 
 private:
 	std::string _DNA_strand;

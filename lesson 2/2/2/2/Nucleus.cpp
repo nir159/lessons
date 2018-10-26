@@ -116,3 +116,24 @@ std::string Nucleus::get_reversed_DNA_strand() const {
 	}
 	return complementary_DNA_strand;
 }
+
+/*
+Function returns how many time a string appears in the strand
+input:
+codon - the string to check
+output:
+the number of times the codon appearce in strand
+*/
+unsigned int Nucleus::get_num_of_codon_appearances(const std::string& codon) const {
+	unsigned int i = 0;
+	int found = 0; // found can be -1 if both strings are the same
+	std::string strand = this->_DNA_strand;
+	while (found != -1 && found != std::string::npos) {
+		found = strand.find(codon); // finds first appearence of codon in strand
+		if (found != -1 && found != std::string::npos) {
+			strand = strand.substr(found + 3, strand.length() - found); // the offset is 3 like the codon is 3 charecters
+			i++;
+		}
+	}
+	return i;
+}

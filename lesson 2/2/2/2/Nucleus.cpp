@@ -54,23 +54,7 @@ void Nucleus::init(const std::string dna_sequence) {
 		// initialize
 		this->_DNA_strand = dna_sequence;
 		// changing the string to the required complementary DNA strand
-		this->_complementary_DNA_strand = "";
-		for (i = 0; i < dna_sequence.length(); i++) {
-			switch (dna_sequence[i]) {
-			case 'A':
-				this->_complementary_DNA_strand.push_back('T');
-				break;
-			case 'T':
-				this->_complementary_DNA_strand.push_back('A');
-				break;
-			case 'C':
-				this->_complementary_DNA_strand.push_back('G');
-				break;
-			case 'G':
-				this->_complementary_DNA_strand.push_back('C');
-			// No need for default we already know what the options are
-			}
-		}
+		this->_complementary_DNA_strand = Nucleus::get_reversed_DNA_strand();
 	}
 	else { // string is not valid
 		std::cerr << "the string can only contain the letters: A, G, C, T" << std::endl;
@@ -79,6 +63,13 @@ void Nucleus::init(const std::string dna_sequence) {
 }
 
 // methods
+/*
+Function will return the DNA as RNA transcript
+input:
+gene - contains information about the gene
+output:
+the RNA transcript
+*/
 std::string Nucleus::get_RNA_transcript(const Gene& gene) const {
 	int i = 0;
 	std::string transcript = "";
@@ -97,4 +88,31 @@ std::string Nucleus::get_RNA_transcript(const Gene& gene) const {
 		}
 	}
 	return transcript;
+}
+
+/*
+Function will return reversed DNA strand
+output:
+the reversed strand
+*/
+std::string Nucleus::get_reversed_DNA_strand() const {
+	int i = 0;
+	std::string complementary_DNA_strand;
+	for (i = 0; i < this->_DNA_strand.length(); i++) {
+		switch (this->_DNA_strand[i]) {
+		case 'A':
+			complementary_DNA_strand.push_back('T');
+			break;
+		case 'T':
+			complementary_DNA_strand.push_back('A');
+			break;
+		case 'C':
+			complementary_DNA_strand.push_back('G');
+			break;
+		case 'G':
+			complementary_DNA_strand.push_back('C');
+			// No need for default we already know what the options are
+		}
+	}
+	return complementary_DNA_strand;
 }

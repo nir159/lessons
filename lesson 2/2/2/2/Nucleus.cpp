@@ -1,5 +1,6 @@
 #include "Nucleus.h"
 #include <iostream>
+#include <string.h>
 
 // class Gene
 // initialize
@@ -44,7 +45,8 @@ void Nucleus::init(const std::string dna_sequence) {
 		reliable = 0;
 	}
 	for (i = 0; i < dna_sequence.length(); i++) {
-		if (dna_sequence[i] != 'A' && dna_sequence[i] != 'G' && dna_sequence[i] != 'C' && dna_sequence[i] != 'T') { // can only contain letters AGCT
+		// can only contain letters AGCT
+		if (dna_sequence[i] != 'A' && dna_sequence[i] != 'G' && dna_sequence[i] != 'C' && dna_sequence[i] != 'T') {
 			reliable = 0;
 		}
 	}
@@ -74,4 +76,25 @@ void Nucleus::init(const std::string dna_sequence) {
 		std::cerr << "the string can only contain the letters: A, G, C, T" << std::endl;
 		_exit(1);
 	}
+}
+
+// methods
+std::string Nucleus::get_RNA_transcript(const Gene& gene) const {
+	int i = 0;
+	std::string transcript = "";
+	// copy the DNA transcript
+	if (gene.is_on_complementary_dna_strand()) {
+		transcript = this->_complementary_DNA_strand; // takes the complementary strand
+		
+	}
+	else {
+		transcript = this->_DNA_strand; // takes the strand
+	}
+	transcript = transcript.substr(gene.getStart, gene.getEnd - gene.getStart); // get rid of unnececery parts
+	for (i = 0; i < transcript.length(); i++) {
+		if (transcript[i] == 'T') {
+			transcript[i] = 'U';
+		}
+	}
+	return transcript;
 }

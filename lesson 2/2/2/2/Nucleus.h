@@ -28,6 +28,9 @@ public:
 	// init
 	void init(const std::string dna_sequence);
 
+	// functions
+	std::string get_RNA_transcript(const Gene& gene) const;
+
 private:
 	std::string _DNA_strand;
 	std::string _complementary_DNA_strand;

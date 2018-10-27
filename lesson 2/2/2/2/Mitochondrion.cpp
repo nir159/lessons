@@ -43,3 +43,21 @@ the amount of glucose to set
 void Mitochondrion::set_glucose(const unsigned int glocuse_units) {
 	this->_glocuse_level = glocuse_units;
 }
+
+/*
+this function returns whether the mitochondrion can produce ATP
+input:
+glocuse_unit The reason is unclear
+output:
+bool can produce atp
+*/
+bool Mitochondrion::produceATP(const int glocuse_unit) const {
+	bool canProduceATP = false;
+	if (this->_glocuse_level >= MIN_GLUCOSE && this->_has_glocuse_receptor == true) {
+		canProduceATP = true;
+	}
+	if (this->_glocuse_level) {
+
+	}
+	return canProduceATP;
+}

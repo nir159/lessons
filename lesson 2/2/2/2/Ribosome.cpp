@@ -31,7 +31,7 @@ Protein* Ribosome::create_protein(std::string &RNA_transcript) const {
 		// goes over the rest of the RNA transcript
 		if (get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)) != UNKNOWN) {
 			protein->add(get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)));
-			rnaTranscript = rnaTranscript.substr(NUC_NEEDED - 1, rnaTranscript.length() - NUC_NEEDED);
+			rnaTranscript = rnaTranscript.substr(NUC_NEEDED, rnaTranscript.length() - NUC_NEEDED);
 		}
 		else {
 			flag = 0;

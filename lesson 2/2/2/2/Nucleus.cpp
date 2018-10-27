@@ -95,7 +95,7 @@ std::string Nucleus::get_RNA_transcript(const Gene& gene) const {
 	else {
 		transcript = this->_DNA_strand; // takes the strand
 	}
-	transcript = transcript.substr(gene.getStart(), (gene.getEnd() + 1)); // get rid of unnececery parts
+	transcript = transcript.substr(gene.getStart() , (gene.getEnd() + 1)); // get rid of unnececery parts
 	for (i = 0; i < transcript.length(); i++) {
 		if (transcript[i] == 'T') {
 			transcript[i] = 'U';

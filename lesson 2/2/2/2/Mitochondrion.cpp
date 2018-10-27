@@ -19,7 +19,7 @@ void Mitochondrion::insert_glucose_receptor(const Protein & protein) {
 	int flag = 0, i = 0;
 	AminoAcidNode* curr = protein.get_first();
 	while (flag == 0) {
-		if (!(curr->get_data() == aminoAcidList[i])) {
+		if (curr->get_data() != aminoAcidList[i]) {
 			flag = 1;
 		}
 		if (curr->get_next() == NULL || curr->get_data() == AMINO_CHAIN_END) {
@@ -55,9 +55,6 @@ bool Mitochondrion::produceATP(const int glocuse_unit) const {
 	bool canProduceATP = false;
 	if (this->_glocuse_level >= MIN_GLUCOSE && this->_has_glocuse_receptor == true) {
 		canProduceATP = true;
-	}
-	if (this->_glocuse_level) {
-
 	}
 	return canProduceATP;
 }

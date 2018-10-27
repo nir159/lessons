@@ -29,5 +29,7 @@ bool Cell::get_ATP() {
 	else {
 		this->_mitochondrion.set_glucose(100);
 	}
+	delete(protein->get_first());
+	delete(protein);
 	return flag;
 }

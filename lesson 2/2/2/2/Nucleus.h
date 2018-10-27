@@ -1,5 +1,6 @@
 #pragma once
 
+/*A class that represents a gene*/
 class Gene 
 {
 public:
@@ -22,6 +23,7 @@ private:
 	bool _on_complementary_dna_strand;
 };
 
+/*A class that represents a Nucleus*/
 class Nucleus
 {
 public:

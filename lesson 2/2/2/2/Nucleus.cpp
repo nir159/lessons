@@ -129,7 +129,7 @@ unsigned int Nucleus::get_num_of_codon_appearances(const std::string& codon) con
 	int found = 0; // found can be -1 if both strings are the same
 	std::string strand = this->_DNA_strand;
 	while (found != -1 && found != std::string::npos) {
-		found = strand.find(codon); // finds first appearence of codon in strand
+		found = strand.find(codon); // finds first appearance of codon in strand
 		if (found != -1 && found != std::string::npos) {
 			strand = strand.substr(found + 3, strand.length() - found); // the offset is 3 like the codon is 3 charecters
 			i++;

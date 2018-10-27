@@ -10,7 +10,9 @@ void Cell::init(const std::string dna_sequence, const Gene glucose_receptor_gene
 }
 
 /*
-
+function is representing a cell
+output:
+true if can produce atp or else false
 */
 bool Cell::get_ATP() {
 	std::string transcript = "";

@@ -34,3 +34,12 @@ void Mitochondrion::insert_glucose_receptor(const Protein & protein) {
 		this->_has_glocuse_receptor = true;
 	}
 }
+
+/*
+function sets glucose
+input:
+the amount of glucose to set
+*/
+void Mitochondrion::set_glucose(const unsigned int glocuse_units) {
+	this->_glocuse_level = glocuse_units;
+}

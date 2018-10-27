@@ -9,8 +9,11 @@ public:
 	// init
 	void init();
 
-	// functions
+	// setters
 	void insert_glucose_receptor(const Protein & protein);
+	void set_glucose(const unsigned int glocuse_units);
+
+
 private:
 	unsigned int _glocuse_level;
 	bool _has_glocuse_receptor;

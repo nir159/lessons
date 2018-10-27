@@ -2,6 +2,7 @@
 #include "Nucleus.h"
 #include "Ribosome.h"
 #include "Mitochondrion.h"
+#include <string>
 
 class Cell
 {

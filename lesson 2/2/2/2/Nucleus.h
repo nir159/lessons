@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 /*A class that represents a gene*/
 class Gene 

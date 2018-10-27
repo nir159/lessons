@@ -11,16 +11,16 @@ the protein that fits the RNA transcript
 */
 Protein* Ribosome::create_protein(std::string &RNA_transcript) const {
 	int flag = 1;
-	AminoAcidNode* head = NULL;
-	Protein* protein = NULL;
+	AminoAcidNode* head = new AminoAcidNode();
+	Protein* protein = new Protein();
 	std::string rnaTranscript = RNA_transcript;
 	protein->init();
 	if (rnaTranscript.length() >= NUC_NEEDED) {
-		if (!(get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)) == UNKNOWN)) {
+		if (get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)) != UNKNOWN) {
 			// takes the first amino acid
-			head->set_data = get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED));
+			head->set_data(get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)));
 			protein->set_first(head);
-			rnaTranscript = rnaTranscript.substr(NUC_NEEDED - 1, rnaTranscript.length() - NUC_NEEDED); // offset of 1 cause string starts from index 0
+			rnaTranscript = rnaTranscript.substr(NUC_NEEDED , rnaTranscript.length() - NUC_NEEDED); // offset of 1 cause string starts from index 0
 		}
 		else {
 			flag = 0; // amino acid is UNKNOWN
@@ -29,7 +29,7 @@ Protein* Ribosome::create_protein(std::string &RNA_transcript) const {
 	}
 	while (rnaTranscript.length() >= NUC_NEEDED && flag != 0) {
 		// goes over the rest of the RNA transcript
-		if (!(get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)) == UNKNOWN)) {
+		if (get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)) != UNKNOWN) {
 			protein->add(get_amino_acid(rnaTranscript.substr(0, NUC_NEEDED)));
 			rnaTranscript = rnaTranscript.substr(NUC_NEEDED - 1, rnaTranscript.length() - NUC_NEEDED);
 		}
@@ -38,8 +38,8 @@ Protein* Ribosome::create_protein(std::string &RNA_transcript) const {
 		}
 	}
 	if (flag == 0) {
-		protein->clear();
-		protein->init();
+		delete(protein);
+		protein = nullptr;
 	}
 	return protein;
 }

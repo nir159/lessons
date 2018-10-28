@@ -98,19 +98,19 @@ std::string complementary_dna(std::string dna_sequence)
 	{
 		if (dna_sequence[i] == 'A')
 		{
-			complementary_dna_strand += 'G';
+			complementary_dna_strand += 'T';
 		}
 		else if (dna_sequence[i] == 'G')
 		{
-			complementary_dna_strand += 'A';
+			complementary_dna_strand += 'C';
 		}
 		else if (dna_sequence[i] == 'C')
 		{
-			complementary_dna_strand += 'T';
+			complementary_dna_strand += 'G';
 		}
 		else if (dna_sequence[i] == 'T')
 		{
-			complementary_dna_strand += 'C';
+			complementary_dna_strand += 'A';
 		}
 		else
 		{

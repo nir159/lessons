@@ -237,6 +237,7 @@ void print_test_result(bool result)
 	std::cout << "\n" << std::endl;
 }
 
+
 int main()
 {
 	DNA_test t = generate_random_test();

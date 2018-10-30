@@ -1,6 +1,33 @@
 #include "Vector.h"
 #include <iostream>
 
+/*
+function will copy one array to another and initialize empty space, delete src and place destination in source
+input:
+src - array to copy
+dst - array to imitate
+sizeSrc - size of source array
+sizeDst - size of destination array
+output:
+the new array inizialized
+* sizeDst needs to be bigger or equal to sizeSrc
+*/
+int* copyArr(int* src, int* dst, int sizeSrc, int sizeDst) {
+	int i = 0;
+	if (sizeDst >= sizeSrc) {
+		for (i = 0; i < sizeSrc; i++) {
+			dst[i] = src[i];
+		}
+		for (i = sizeSrc; i < sizeDst; i++) {
+			dst[i] = 0;
+		}
+		delete[] src;
+		src = dst;
+		dst = NULL;
+	}
+	return src;
+}
+
 // part A
 
 // constructor with size only
@@ -64,14 +91,7 @@ void Vector::push_back(const int& val) {
 		// creating new array with bigger capacity
 		newArr = new int[(this->_capacity + this->_resizeFactor)];
 		// initialize the array
-		for (i = 0; i < this->_capacity; i++) {
-			newArr[i] = this->_elements[i];
-		}
-		for (i = this->_capacity; i < this->_capacity + this->_resizeFactor; i++) {
-			newArr[i] = 0;
-		}
-		delete[] this->_elements;
-		this->_elements = newArr;
+		this->_elements = copyArr(this->_elements, newArr, this->_size, this->_capacity + this->_resizeFactor);
 		newArr = NULL;
 		this->_capacity += this->_resizeFactor;
 		push_back(val);
@@ -95,4 +115,26 @@ int Vector::pop_back() {
 		this->_size--;
 	}
 	return val;
+}
+
+/*
+Function will make sure vector has at least n space(including the existing elements)
+input:
+new capacity
+*/
+void Vector::reserve(int n) {
+	int resize = 0;
+	int* newArr = NULL;
+	if (n > this->_capacity) {
+		if ((n % this->_resizeFactor) != 0){
+			resize = ((n / this->_resizeFactor) + 1) * this->_resizeFactor;
+		}
+		else {
+			resize = n;
+		}
+		newArr = new int[resize];
+		this->_elements = copyArr(this->_elements, newArr, this->_size, resize);
+		newArr = NULL;
+		this->_capacity = resize;
+	}
 }

@@ -21,3 +21,26 @@ Vector::~Vector() {
 }
 
 
+// getters
+int Vector::size() const {
+	return this->_size;
+}
+
+int Vector::capacity() const {
+	return this->_capacity;
+}
+
+int Vector::resizeFactor() const {
+	return this->_resizeFactor;
+}
+
+bool Vector::empty() const {
+	int i = 0;
+	bool flag = true;
+	for (i = 0; i < this->_size; i++) {
+		if (this->_elements[i] != NULL) {
+			flag = false;
+		}
+	}
+	return flag;
+}

@@ -46,12 +46,33 @@ Vector::Vector(int n) {
 	}
 }
 
+// copy constructor
+Vector::Vector(const Vector& other) {
+	int i = 0;
+	this->_size = other._size;
+	this->_capacity = other._capacity;
+	this->_resizeFactor = other._resizeFactor;
+	this->_elements = new int[this->_capacity];
+	for (i = 0; i < other._capacity; i++) {
+		this->_elements[i] = other._elements[i];
+	}
+}
+
 // destructor clears the memory located
 Vector::~Vector() {
 	delete[] this->_elements;
 	this->_elements = nullptr;
 }
 
+// operators overloading
+Vector& Vector::operator=(const Vector& other) {
+	int i = 0;
+	resize(other._size);
+	for (i = 0; i < this->_capacity; i++) {
+		this->_elements[i] = other._elements[i];
+	}
+	return *this;
+}
 
 // getters
 int Vector::size() const {

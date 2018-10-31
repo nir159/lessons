@@ -7,6 +7,7 @@ int main() {
 	arr.push_back(30);
 	arr.reserve(11);
 	arr.push_back(30);
+	arr.resize(20, 2);
 	arr.~Vector();
 	getchar();
 	return 0;

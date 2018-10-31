@@ -138,3 +138,51 @@ void Vector::reserve(int n) {
 		this->_capacity = resize;
 	}
 }
+
+/*
+changes the size of the array to n
+input:
+the new size
+*/
+void Vector::resize(int n) {
+	int i = 0;
+	if (n > this->_capacity) {
+		reserve(n);
+		for (i = this->_size; i < n; i++) {
+			this->_elements[i] = VALUE;
+		}
+		this->_size = n;
+	}
+	else {
+		while (n < this->_size) {
+			pop_back();
+		}
+	}
+}
+
+/*
+Assign the value to all existed elements
+input:
+value to assign
+*/
+void Vector::assign(int val) {
+	int i = 0;
+	while (this->_elements[i] != NULL) {
+		this->_elements[i] = val;
+	}
+}
+
+/*
+changes the size of the array to n, if adds numbers assigns them to val
+input:
+the new size, the number to asssign to every new element
+*/
+void Vector::resize(int n, const int& val) {
+	int i = 0;
+	resize(n);
+	for (i = 0; i < this->_capacity; i++) {
+		if (this->_elements[i] == VALUE) {
+			this->_elements[i] = val;
+		}
+	}
+}

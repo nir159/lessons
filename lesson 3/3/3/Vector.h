@@ -1,6 +1,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#define VALUE 1
+
 int* copyArr(int* src, int* dst, int sizeSrc, int sizeDst);
 
 class Vector

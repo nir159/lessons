@@ -74,6 +74,60 @@ Vector& Vector::operator=(const Vector& other) {
 	return *this;
 }
 
+int& Vector::operator[](int n) const {
+	return this->_elements[n];
+}
+
+Vector& Vector::operator+=(const Vector& other) {
+	int i = 0;
+	if (this->_capacity < other._capacity) {
+		resize(other._capacity);
+	}
+	while (i < other._capacity) {
+		this->_elements[i] += other._elements[i];
+		i++;
+	}
+	return *this;
+}
+
+Vector& Vector::operator-=(const Vector& other) {
+	int i = 0;
+	if (this->_capacity < other._capacity) {
+		resize(other._capacity);
+	}
+	while (i < other._capacity) {
+		this->_elements[i] -= other._elements[i];
+		i++;
+	}
+	return *this;
+}
+
+Vector& Vector::operator+(const Vector& other) {
+	Vector temp = *this;
+	*this += other; // changing current object value
+	Vector* change = new Vector(*this);
+	*this = temp; // changing this to his initial value
+	return *change;
+}
+
+Vector& Vector::operator-(const Vector& other) {
+	Vector temp = *this;
+	*this -= other; // changing current object value
+	Vector* change = new Vector(*this);
+	*this = temp; // changing this to his initial value
+	return *change;
+}
+
+std::ostream& operator<<(std::ostream& os, const Vector& vector) {
+	int i = 0;
+	std::cout << "Vector Info:\nCapacity is " << vector.capacity() << "\nSize is " << vector.size() << " data is {";
+	for (i = 0; i < vector.size(); i++) {
+		std::cout << vector[i] << ", ";
+	}
+	std::cout << "}\n";
+	return os;
+}
+
 // getters
 int Vector::size() const {
 	return this->_size;

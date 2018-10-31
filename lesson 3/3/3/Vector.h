@@ -1,7 +1,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
-
 #define VALUE 1
+
+#include <iostream>
 
 int* copyArr(int* src, int* dst, int sizeSrc, int sizeDst);
 
@@ -40,9 +41,12 @@ public:
 	//D
 	//Element Access
 	int& operator[](int n) const;//n'th element
-
-
-
+	Vector& operator+=(const Vector& other);
+	Vector& operator-=(const Vector& other);
+	Vector& operator+(const Vector& other);
+	Vector& operator-(const Vector& other);
+	friend void printWidth(const Vector& vector);
+	friend std::ostream& operator<<(std::ostream& os, const Vector& vector);
 };
 
 #endif

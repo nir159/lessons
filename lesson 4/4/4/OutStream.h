@@ -23,4 +23,17 @@ public:
 	~FileStream();
 };
 
+class OutStreamEncrypted : public OutStream
+{
+private:
+	int offset;
+public:
+	OutStreamEncrypted(int offset);
+	~OutStreamEncrypted();
+
+	OutStreamEncrypted& operator<<(const char *str);
+	OutStreamEncrypted& operator<<(int num);
+	OutStreamEncrypted& operator<<(void(*pf)(FILE* f));
+};
+
 void endline(FILE* f);

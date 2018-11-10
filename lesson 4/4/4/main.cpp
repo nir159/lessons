@@ -1,11 +1,17 @@
 #include <iostream>
 #include "OutStream.h"
+#include "Logger.h"
 
 int main() {
-	/*FileStream obj("msg.txt");
-	obj << "I am the Doctor and I'm " << 1500 << " years old" << endline;*/
-	OutStreamEncrypted obj(1);
+	/*FileStream obj(msg.txt);
 	obj << "I am the Doctor and I'm " << 1500 << " years old" << endline;
+	OutStream os;
+	os << "I am the Doctor and I'm " << 1500 << " years old" << endline;
+	OutStreamEncrypted obj(1);
+	obj << "I am the Doctor and I'm " << 1500 << " years old" << endline;*/
+	Logger obj;
+	obj << "I am the Doctor and I'm " << 1500 << " years old" << endline;
+	obj << "this is line number " << 2 << " some more important information" << endline;
 	getchar();
 	return 0;
 }

@@ -9,6 +9,8 @@ public:
 	OutStream();
 	~OutStream();
 
+	FILE* getFile();
+
 	OutStream& operator<<(const char *str);
 	OutStream& operator<<(int num);
 	OutStream& operator<<(void(*pf)(FILE* f));

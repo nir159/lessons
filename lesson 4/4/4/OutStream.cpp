@@ -14,6 +14,10 @@ OutStream::~OutStream()
 {
 }
 
+FILE* OutStream::getFile() {
+	return this->file;
+}
+
 OutStream& OutStream::operator<<(const char *str)
 {
 	fprintf(this->file, "%s", str);

@@ -8,7 +8,10 @@ Logger::~Logger()
 }
 
 void Logger::setStartLine() {
+	static unsigned int counter = 0;
 	if (this->_startLine) {
+		std::cout << "LOG <" << counter  << "> ";
+		counter++;
 		this->_startLine = false;
 	}
 	else {
@@ -18,7 +21,6 @@ void Logger::setStartLine() {
 
 Logger& operator<<(Logger& l, const char *msg) {
 	if (l._startLine) {
-		std::cout << "LOG ";
 		l.setStartLine();
 	}
 	l.os << msg;
@@ -27,7 +29,6 @@ Logger& operator<<(Logger& l, const char *msg) {
 
 Logger& operator<<(Logger& l, int num) {
 	if (l._startLine) {
-		std::cout << "LOG ";
 		l.setStartLine();
 	}
 	l.os << num;

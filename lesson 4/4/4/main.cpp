@@ -10,8 +10,10 @@ int main() {
 	OutStreamEncrypted obj(1);
 	obj << "I am the Doctor and I'm " << 1500 << " years old" << endline;*/
 	Logger obj;
+	Logger secondObj;
 	obj << "I am the Doctor and I'm " << 1500 << " years old" << endline;
-	obj << "this is line number " << 2 << " some more important information" << endline;
+	secondObj << "this is line number " << 2 << " some more important information" << endline;
+	obj << "this is the last line";
 	getchar();
 	return 0;
 }

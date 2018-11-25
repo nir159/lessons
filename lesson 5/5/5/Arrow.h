@@ -13,6 +13,7 @@ public:
 	// override functions if need (virtual + pure virtual)
 	double getArea() const;
 	double getPerimeter() const;
+	void move(const Point& other);
 private:
 	Point _p1;
 	Point _p2;

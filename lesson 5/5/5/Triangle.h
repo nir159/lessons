@@ -14,6 +14,8 @@ public:
 
 	void clearDraw(cimg_library::CImgDisplay & disp, cimg_library::CImg<unsigned char>& board);
 
+	void move(const Point& other);
+
 	// override functions if need (virtual + pure virtual)
 	double getArea() const;
 	double getPerimeter() const;

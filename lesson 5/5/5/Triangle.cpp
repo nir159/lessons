@@ -27,6 +27,13 @@ void Triangle::clearDraw(cimg_library::CImgDisplay& disp, cimg_library::CImg<uns
 		_points[2].getX(), _points[2].getY(), BLACK, 100.0f).display(disp);
 }
 
+void Triangle::move(const Point& other) {
+	this->_p1 += other;
+	this->_p2 += other;
+	this->_p3 += other;
+
+}
+
 double Triangle::getArea() const {
 	return (this->_p1.getX() * (this->_p2.getY() - this->_p3.getY()) + this->_p2.getX() * (this->_p3.getY() - this->_p1.getY()) + this->_p3.getX() * (this->_p1.getY() - this->_p2.getY())) / 2;
 }

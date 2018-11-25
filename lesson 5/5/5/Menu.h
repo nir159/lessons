@@ -23,16 +23,19 @@ public:
 	void clearScreen();
 	void choiseMainScreen();
 	void choiseAddShape();
+	void printShape();
 	void printShapes();
-	
+
 	// work with shapes
 	void addChoiseShape();
+	void shapeModify();
+	void clearAndDraw();
 	void clearBoard();
 	void exit();
 
 private: 
-	vector<Shape> _shapes;
-	int _choise;
+	vector<Shape*> _shapes;
+	int _choice;
 	cimg_library::CImg<unsigned char>* _board;
 	cimg_library::CImgDisplay* _disp;
 };

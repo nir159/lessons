@@ -29,6 +29,10 @@ void Circle::clearDraw(cimg_library::CImgDisplay& disp, cimg_library::CImg<unsig
 	const Point& c = getCenter();
 }
 
+void Circle::move(const Point& other) {
+	this->_center += other;
+}
+
 double Circle::getArea() const {
 	return PI * pow(this->_radius, 2.0);
 }

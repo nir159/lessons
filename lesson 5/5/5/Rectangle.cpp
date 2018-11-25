@@ -24,6 +24,10 @@ void myShapes::Rectangle::clearDraw(cimg_library::CImgDisplay& disp, cimg_librar
 		_points[1].getX(), _points[1].getY(), BLACK, 100.0f).display(disp);
 }
 
+void myShapes::Rectangle::move(const Point& other) {
+	this->_p1 += other;
+}
+
 double myShapes::Rectangle::getArea() const {
 	return this->_length * this->_width;
 }

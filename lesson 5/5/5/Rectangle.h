@@ -22,5 +22,7 @@ namespace myShapes
 
 		void clearDraw(cimg_library::CImgDisplay & disp, cimg_library::CImg<unsigned char>& board);
 
+		void move(const Point& other);
+
 	};
 }

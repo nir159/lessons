@@ -19,6 +19,7 @@ public:
 
 	virtual void draw(cimg_library::CImgDisplay& disp, cimg_library::CImg<unsigned char>& board);
 	virtual void clearDraw(cimg_library::CImgDisplay& disp, cimg_library::CImg<unsigned char>& board);
+	virtual void move(const Point& other);
 
 	// override functions if need (virtual + pure virtual)
 	double getArea() const;

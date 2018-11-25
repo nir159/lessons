@@ -4,6 +4,8 @@ myShapes::Rectangle::Rectangle(const Point& a, double length, double width, cons
 	if (length <= 0 || width <= 0) {
 		std::cout << "Error: wrong size" << std::endl;
 	}
+	this->_points.push_back(this->_p1);
+	this->_points.push_back(Point(this->_p1.getX() + length, this->_p1.getY() + width));
 }
 
 myShapes::Rectangle::~Rectangle()

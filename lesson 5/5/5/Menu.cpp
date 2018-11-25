@@ -3,23 +3,11 @@
 int Menu::getNum(string msg) {
 	int x;
 	cout << msg << endl;
-	while (!cin >> x) {
+	if (!(cin >> x)) {
 		cout << "Error: wrong value" << endl;
 		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max());
-		cout << msg << endl;
-	}
-	return x;
-}
-
-string& Menu::getString(string msg) {
-	string x;
-	cout << msg << endl;
-	while (!(cin >> x)) {
-		cout << "Error: wrong value" << endl;
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max());
-		cout << msg << endl;
+		system("PAUSE");
+		_exit(EXIT_FAILURE);
 	}
 	return x;
 }
@@ -37,36 +25,32 @@ Menu::~Menu()
 	delete _disp;
 }
 
-int Menu::getChoise() {
-	return this->getChoise;
+int Menu::getChoice() {
+	return this->_choice;
 }
 
 void Menu::clearScreen() {
-	cout << string(100, '\n');
+	system("CLS");
 }
 
-void Menu::choiseMainScreen(){
-	cout << "Enter 0 to add a new shape.\nEnter 1 to modify or get information from a current shape.\nEnter 2 to delete all of the shapes.\nEnter 3 to exit." << endl;
-	cin >> this->_choice;
-	while (!cin || (this->_choice < 0 && this->_choice > 3)) {
-		cout << "Error: number is needed(0~3)" << endl;
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max());
+void Menu::choiceMainScreen(){
+	this->_choice = getNum("Enter 0 to add a new shape.\nEnter 1 to modify or get information from a current shape.\nEnter 2 to delete all of the shapes.\nEnter 3 to exit.");
+	while (this->_choice < 0 || this->_choice > 3) {
+		cout << "only 0~3" << endl;
+		this->_choice = getNum("Enter 0 to add a new shape.\nEnter 1 to modify or get information from a current shape.\nEnter 2 to delete all of the shapes.\nEnter 3 to exit.");
 	}
 }
 
-void Menu::choiseAddShape() {
-	cout << "Enter 0 to add a circle.\nEnter 1 to add an arrow.\nEnter 2 to add a triangle.\nEnter 3 to add a rectangle." << endl;
-	cin >> this->_choice;
-	while (!cin || (this->_choice < 0 && this->_choice > 3)) {
-		cout << "Error: number is needed" << endl;
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max());
+void Menu::choiceAddShape() {
+	this->_choice = getNum("Enter 0 to add a circle.\nEnter 1 to add an arrow.\nEnter 2 to add a triangle.\nEnter 3 to add a rectangle.");
+	while (this->_choice < 0 || this->_choice > 3) {
+		cout << "only 0~3" << endl;
+		this->_choice = getNum("Enter 0 to add a circle.\nEnter 1 to add an arrow.\nEnter 2 to add a triangle.\nEnter 3 to add a rectangle.");
 	}
 }
 
 void Menu::printShape() {
-	cout << this->_shapes[this->_choice]->getType() << "		" << this->_shapes[this->_choice]->getName() << "		" << this->_shapes[this->_choice]->getArea() << "		" << this->_shapes[this->_choice]->getPerimeter();
+	cout << this->_shapes[this->_choice]->getType() << "		" << this->_shapes[this->_choice]->getName() << "		" << this->_shapes[this->_choice]->getArea() << "		" << this->_shapes[this->_choice]->getPerimeter() << endl;
 }
 
 void Menu::printShapes() {
@@ -76,7 +60,7 @@ void Menu::printShapes() {
 	}
 }
 
-void Menu::addChoiseShape() {
+void Menu::addChoiceShape() {
 	int x = 0;
 	int y = 0;
 	double radius = 0;
@@ -90,24 +74,38 @@ void Menu::addChoiseShape() {
 			y = getNum("Please enter Y: ");
 			cout << "Please enter radius: " << endl;
 			cin >> radius;
-			while (!cin || radius < 1) {
+			if (!cin || radius < 1) {
 				cout << "Error: number is needed" << endl;
 				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter radius: " << endl;
+				system("PAUSE");
+				_exit(EXIT_FAILURE);
 			}
-			name = getString("Please enter the name of the shape: ");
-			this->_shapes.push_back(&Circle(Point(x, y), radius, "Circle", name));
+			cout << "Please enter the name of the shape: " << endl;
+			if (!(cin >> name)) {
+				cout << "Error: wrong value" << endl;
+				cin.clear();
+				system("PAUSE");
+				_exit(EXIT_FAILURE);
+			}
+			this->_shapes.push_back(new Circle(Point(x, y), radius, name, "Circle"));
 			this->_shapes[this->_shapes.size()-1]->draw(*(this->_disp), *(this->_board));
+			break;
 		case 1:
 			x = getNum("Please enter X: ");
 			y = getNum("Please enter Y: ");
 			p1 = Point(x, y);
 			x = getNum("Please enter X: ");
 			y = getNum("Please enter Y: ");
-			name = getString("Please enter the name of the shape: ");
-			this->_shapes.push_back(&Arrow(p1, Point(x, y), "Arrow", name));
+			cout << "Please enter the name of the shape: " << endl;
+			if (!(cin >> name)) {
+				cout << "Error: wrong value" << endl;
+				cin.clear();
+				system("PAUSE");
+				_exit(EXIT_FAILURE);
+			}
+			this->_shapes.push_back(new Arrow(p1, Point(x, y), name, "Arrow"));
 			this->_shapes[this->_shapes.size() - 1]->draw(*(this->_disp), *(this->_board));
+			break;
 		case 2:
 			x = getNum("Please enter X: ");
 			y = getNum("Please enter Y: ");
@@ -117,17 +115,32 @@ void Menu::addChoiseShape() {
 			p2 = Point(x, y);
 			x = getNum("Please enter X: ");
 			y = getNum("Please enter Y: ");
-			name = getString("Please enter the name of the shape: ");
-			this->_shapes.push_back(&Triangle(p1, p2, Point(x, y), "Triangle", name));
+			cout << "Please enter the name of the shape: " << endl;
+			if (!(cin >> name)) {
+				cout << "Error: wrong value" << endl;
+				cin.clear();
+				system("PAUSE");
+				_exit(EXIT_FAILURE);
+			}
+			this->_shapes.push_back(new Triangle(p1, p2, Point(x, y), name, "Triangle"));
 			this->_shapes[this->_shapes.size() - 1]->draw(*(this->_disp), *(this->_board));
+			break;
 		case 3:
 			x = getNum("Please enter X: ");
 			y = getNum("Please enter Y: ");
 			p1 = Point(x, y);
 			x = getNum("Please enter the length of the shape: ");
 			y = getNum("Please enter the width of the shape: ");
-			this->_shapes.push_back(&myShapes::Rectangle(p1, x, y, "Rectangle", name));
+			cout << "Please enter the name of the shape: " << endl;
+			if (!(cin >> name)) {
+				cout << "Error: wrong value" << endl;
+				cin.clear();
+				system("PAUSE");
+				_exit(EXIT_FAILURE);
+			}
+			this->_shapes.push_back(new myShapes::Rectangle(p1, x, y, name, "Rectangle"));
 			this->_shapes[this->_shapes.size() - 1]->draw(*(this->_disp), *(this->_board));
+			this->_choice = 0;
 	}
 }
 
@@ -156,24 +169,23 @@ void Menu::shapeModify() {
 	switch (option) {
 		case 0:
 			clearScreen();
-			do {
-				x = getNum("Please enter the X moving scale: ");
-			} while (x > 100 || x < -100);
-			do {
-				y = getNum("Please enter the Y moving scale: ");
-			} while (y > 100 || y < -100);
+			x = getNum("Please enter the X moving scale: ");
+			y = getNum("Please enter the Y moving scale: ");
 			this->_shapes[this->_choice]->move(Point(x, y));
 			clearAndDraw();
 			clearScreen();
+			break;
 		case 1:
 			printShape();
 			system("PAUSE");
 			clearScreen();
+			break;
 		case 2:
 			this->_shapes[this->_choice]->clearDraw(*(this->_disp), *(this->_board));
 			this->_shapes.erase(this->_shapes.begin() + this->_choice);
 			clearAndDraw();
 			clearScreen();
+			break;
 	}
 }
 
@@ -187,6 +199,6 @@ void Menu::clearBoard() {
 
 void Menu::exit() {
 	clearBoard();
-	clearScreen();
+	cout << string(100, '\n');
 	cout << "Good Bye! " << endl;
 }

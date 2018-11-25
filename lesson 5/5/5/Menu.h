@@ -17,17 +17,16 @@ public:
 	~Menu();
 
 	int getNum(string msg);
-	string& getString(string msg);
-	int getChoise();
+	int getChoice();
 	// prints to user
 	void clearScreen();
-	void choiseMainScreen();
-	void choiseAddShape();
+	void choiceMainScreen();
+	void choiceAddShape();
 	void printShape();
 	void printShapes();
 
 	// work with shapes
-	void addChoiseShape();
+	void addChoiceShape();
 	void shapeModify();
 	void clearAndDraw();
 	void clearBoard();

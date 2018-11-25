@@ -5,6 +5,9 @@ Triangle::Triangle(const Point& a, const Point& b, const Point& c, const string&
 	if ((a.getX() == b.getX() && b.getX() == c.getX()) || (a.getY() == b.getY() && b.getY() == c.getY())) {
 		std::cout << "Error: Wrong coordinates" << std::endl;
 	}
+	this->_points.push_back(this->_p1);
+	this->_points.push_back(this->_p2);
+	this->_points.push_back(this->_p3);
 }
 
 Triangle::~Triangle()
@@ -31,7 +34,10 @@ void Triangle::move(const Point& other) {
 	this->_p1 += other;
 	this->_p2 += other;
 	this->_p3 += other;
-
+	this->_points.clear();
+	this->_points.push_back(this->_p1);
+	this->_points.push_back(this->_p2);
+	this->_points.push_back(this->_p3);
 }
 
 double Triangle::getArea() const {

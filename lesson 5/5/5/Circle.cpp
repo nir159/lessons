@@ -27,6 +27,7 @@ void Circle::clearDraw(cimg_library::CImgDisplay& disp, cimg_library::CImg<unsig
 {
 	unsigned char BLACK[] = { 0, 0, 0 };
 	const Point& c = getCenter();
+	board.draw_circle(c.getX(), c.getY(), getRadius(), BLACK, 100.0f).display(disp);
 }
 
 void Circle::move(const Point& other) {

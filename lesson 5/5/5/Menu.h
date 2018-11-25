@@ -28,7 +28,8 @@ public:
 	// work with shapes
 	void addChoiceShape();
 	void shapeModify();
-	void clearAndDraw();
+	void clearAll();
+	void addAll();
 	void clearBoard();
 	void exit();
 

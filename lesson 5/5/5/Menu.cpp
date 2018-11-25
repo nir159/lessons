@@ -144,15 +144,21 @@ void Menu::addChoiceShape() {
 	}
 }
 
-void Menu::clearAndDraw() {
+void Menu::clearAll () {
 	int i = 0;
 	for (i = 0; i < this->_shapes.size(); i++) {
 		this->_shapes[i]->clearDraw(*(this->_disp), *(this->_board));
 	}
+}
+
+
+void Menu::addAll() {
+	int i = 0;
 	for (i = 0; i < this->_shapes.size(); i++) {
 		this->_shapes[i]->draw(*(this->_disp), *(this->_board));
 	}
 }
+
 
 void Menu::shapeModify() {
 	int x = 0, y = 0;
@@ -171,8 +177,9 @@ void Menu::shapeModify() {
 			clearScreen();
 			x = getNum("Please enter the X moving scale: ");
 			y = getNum("Please enter the Y moving scale: ");
+			clearAll();
 			this->_shapes[this->_choice]->move(Point(x, y));
-			clearAndDraw();
+			addAll();
 			clearScreen();
 			break;
 		case 1:
@@ -181,9 +188,9 @@ void Menu::shapeModify() {
 			clearScreen();
 			break;
 		case 2:
-			this->_shapes[this->_choice]->clearDraw(*(this->_disp), *(this->_board));
+			clearAll();
 			this->_shapes.erase(this->_shapes.begin() + this->_choice);
-			clearAndDraw();
+			addAll();
 			clearScreen();
 			break;
 	}

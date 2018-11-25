@@ -25,6 +25,11 @@ void Arrow::clearDraw(cimg_library::CImgDisplay& disp, cimg_library::CImg<unsign
 		_p2.getX(), _p2.getY(), BLACK, 100.0f).display(disp);
 }
 
+void Arrow::move(const Point& other) {
+	this->_p1 += other;
+	this->_p2 += other;
+}
+
 double Arrow::getArea() const{
 	return 0;
 }

@@ -30,7 +30,7 @@ void Circle::clearDraw(cimg_library::CImgDisplay& disp, cimg_library::CImg<unsig
 }
 
 double Circle::getArea() const {
-	return PI * pow(this->_radius);
+	return PI * pow(this->_radius, 2.0);
 }
 
 double Circle::getPerimeter() const {

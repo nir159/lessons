@@ -16,12 +16,22 @@ public:
 	Menu();
 	~Menu();
 
-	// more functions..
+	int getNum(string msg);
+	string& getString(string msg);
+	int getChoise();
+	// prints to user
 	void clearScreen();
 	void choiseMainScreen();
-	int getChoise();
+	void choiseAddShape();
+	void printShapes();
+	
+	// work with shapes
+	void addChoiseShape();
+	void clearBoard();
+	void exit();
+
 private: 
-	vector<Shape> shapes;
+	vector<Shape> _shapes;
 	int _choise;
 	cimg_library::CImg<unsigned char>* _board;
 	cimg_library::CImgDisplay* _disp;

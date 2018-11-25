@@ -1,5 +1,28 @@
 #include "Menu.h"
 
+int Menu::getNum(string msg) {
+	int x;
+	cout << msg << endl;
+	while (!cin >> x) {
+		cout << "Error: wrong value" << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max());
+		cout << msg << endl;
+	}
+	return x;
+}
+
+string& Menu::getString(string msg) {
+	string x;
+	cout << msg << endl;
+	while (!(cin >> x)) {
+		cout << "Error: wrong value" << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max());
+		cout << msg << endl;
+	}
+	return x;
+}
 
 Menu::Menu() 
 {
@@ -52,20 +75,8 @@ void Menu::addChoiseShape() {
 
 	switch (this->_choise) {
 		case 0:
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
 			cout << "Please enter radius: " << endl;
 			cin >> radius;
 			while (!cin || radius < 1) {
@@ -74,138 +85,36 @@ void Menu::addChoiseShape() {
 				cin.ignore(numeric_limits<streamsize>::max());
 				cout << "Please enter radius: " << endl;
 			}
-			cout << "Please enter the name of the shape: " << endl;
-			while (!(cin >> name)) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter valid name: " << endl;
-			}
+			name = getString("Please enter the name of the shape: ");
 			this->_shapes.push_back(Circle(Point(x, y), radius, "circle", name));
 			this->_shapes[this->_shapes.size()-1].draw(*(this->_disp), *(this->_board));
 		case 1:
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
 			p1 = Point(x, y);
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
-			cout << "Please enter the name of the shape: " << endl;
-			while (!(cin >> name)) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter valid name: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
+			name = getString("Please enter the name of the shape: ");
 			this->_shapes.push_back(Arrow(p1, Point(x, y), "arrow", name));
 			this->_shapes[this->_shapes.size() - 1].draw(*(this->_disp), *(this->_board));
 		case 2:
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
 			p1 = Point(x, y);
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
 			p2 = Point(x, y);
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
-			cout << "Please enter the name of the shape: " << endl;
-			while (!(cin >> name)) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter valid name: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
+			name = getString("Please enter the name of the shape: ");
 			this->_shapes.push_back(Triangle(p1, p2, Point(x, y), "triangle", name));
 			this->_shapes[this->_shapes.size() - 1].draw(*(this->_disp), *(this->_board));
 		case 3:
-			cout << "Please enter X: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter X: " << endl;
-			}
-			cout << "Please enter Y: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter Y: " << endl;
-			}
+			x = getNum("Please enter X: ");
+			y = getNum("Please enter Y: ");
 			p1 = Point(x, y);
-			cout << "Please enter the length of the shape: " << endl;
-			while (!cin >> x) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter the length of the shape: " << endl;
-			}
-			cout << "Please enter the width of the shape: " << endl;
-			while (!cin >> y) {
-				cout << "Error: number is needed" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max());
-				cout << "Please enter the width of the shape: " << endl;
-			}
+			x = getNum("Please enter the length of the shape: ");
+			y = getNum("Please enter the width of the shape: ");
 			this->_shapes.push_back(myShapes::Rectangle(p1, x, y, "rectangle", name));
 			this->_shapes[this->_shapes.size() - 1].draw(*(this->_disp), *(this->_board));
 	}
@@ -214,7 +123,7 @@ void Menu::addChoiseShape() {
 void Menu::clearBoard() {
 	int i = 0;
 	for (i = 0; i < this->_shapes.size(); i++) {
-		this->_shapes[i].clearDraw();
+		this->_shapes[i].clearDraw(*(this->_disp), *(this->_board));
 	}
 	this->_shapes.clear();
 }

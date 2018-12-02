@@ -8,7 +8,10 @@
 
 
 parallelogram::parallelogram(std::string col, std::string nam, int h, int w, double ang, double ang2):quadrilateral(col, nam, h, w) {
-	 setAngle(ang, ang2);
+	if (ang < 0 || ang > 180 || ang2 < 0 || ang2 > 180) {
+		throw shapeException();
+	}
+	setAngle(ang, ang2);
 }
 void parallelogram::draw()
 {
@@ -24,6 +27,9 @@ double parallelogram::CalArea(double w, double h) {
 	return w*h;
 }
 void parallelogram::setAngle(double ang, double ang2) {
+	if (ang < 0 || ang > 180 || ang2 < 0 || ang2 > 180) {
+		throw shapeException();
+	}
 	angle = ang;
 	angle2 = ang2;
 }

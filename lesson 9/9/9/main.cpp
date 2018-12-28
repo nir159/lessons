@@ -15,6 +15,9 @@ int main()
 	bs->insert("8");
 	bs->insert("3");
 	bs->insert("5");
+	bs->insert("5");
+	bs->insert("5");
+	bs->getLeft()->getRight()->getRight()->isLeaf();
 	bs->insert("9");
 	bs->insert("6");
 	

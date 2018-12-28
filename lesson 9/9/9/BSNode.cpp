@@ -9,7 +9,7 @@ BSNode::~BSNode() {
 	}
 }
 
-BSNode::BSNode(string data) : _data(data), _left(NULL), _right(NULL){}
+BSNode::BSNode(string data) : _count(1), _data(data), _left(NULL), _right(NULL){}
 
 BSNode::BSNode(const BSNode& other) : _data(other.getData()){
 	if (other.getLeft()) {
@@ -39,8 +39,11 @@ bool BSNode::isLeaf() const {
 
 // Function will insert a value to the binary tree
 void BSNode::insert(string value) {
+	if (_data.compare(value) == NULL) {
+		_count++;
+	}
 	if (_data.compare(value) > NULL) {
-		if (_left && _left->getData().compare(value) != NULL) {
+		if (_left) {
 			_left->insert(value);
 		}
 		else if (!_left) {
@@ -49,7 +52,7 @@ void BSNode::insert(string value) {
 		
 	}
 	else if (_data.compare(value) < NULL) {
-		if (_right && _right->getData().compare(value) != NULL) {
+		if (_right) {
 			_right->insert(value);
 		}
 		else if (!_right) {

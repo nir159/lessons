@@ -34,7 +34,7 @@ private:
 	BSNode* _left;
 	BSNode* _right;
 
-	int _count; //for question 1 part B
+	int _count; 
 	int BSNode::getCurrNodeDistFromInputNode(const BSNode* node) const; //auxiliary function for getDepth
 
 };

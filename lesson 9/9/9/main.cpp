@@ -17,12 +17,11 @@ int main()
 	bs->insert("5");
 	bs->insert("9");
 	bs->insert("6");
-	bs->insert("222");
 	
 
-	/*cout << "Tree height: " << bs->getHeight() << endl;
+	cout << "Tree height: " << bs->getHeight() << endl;
 	cout << "depth of node with 5 depth: " << bs->getLeft()->getRight()->getRight()->getDepth(*bs) << endl;
-	cout << "depth of node with 3 depth: " << bs->getLeft()->getRight()->getDepth(*bs) << endl;*/
+	cout << "depth of node with 3 depth: " << bs->getLeft()->getRight()->getDepth(*bs) << endl;
 
 
 	string textTree = "BSTData.txt";

@@ -90,6 +90,25 @@ int BSNode::getHeight() const {
 	return _right->getHeight() + LEAF_HEIGHT;
 }
 
+// Function will return the level of how deep the current node is compared to parameter root
+int BSNode::getDepth(const BSNode& root) const {
+	return root.getCurrNodeDistFromInputNode(this);
+}
+
+// Function will return the level of how deep the current node is from parameter root
+int BSNode::getCurrNodeDistFromInputNode(const BSNode* node) const {
+	if (!search(node->getData())) {
+		return -1;
+	}
+	if (_data.compare(node->getData()) == NULL) {
+		return NULL;
+	}
+	else if (_data.compare(node->getData()) > NULL) {
+		return _left->getCurrNodeDistFromInputNode(node) + LEAF_HEIGHT;
+	}
+	return _right->getCurrNodeDistFromInputNode(node) + LEAF_HEIGHT;
+}
+
 // Getters
 string BSNode::getData() const {
 	return _data;

@@ -2,6 +2,7 @@
 #define BSNode_H
 #define LEAF_HEIGHT 1
 
+#include <iostream>
 #include <string>
 
 using namespace std;

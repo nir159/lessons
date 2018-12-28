@@ -112,6 +112,17 @@ int BSNode::getCurrNodeDistFromInputNode(const BSNode* node) const {
 	return _right->getCurrNodeDistFromInputNode(node) + LEAF_HEIGHT;
 }
 
+// Function will print the tree tree travel method: inorder
+void BSNode::printNodes() const {
+	if (_left) {
+		_left->printNodes();
+	}
+	std::cout << _data << " " << _count << std::endl;
+	if (_right) {
+		_right->printNodes();
+	}
+}
+
 // Getters
 string BSNode::getData() const {
 	return _data;

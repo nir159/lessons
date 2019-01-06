@@ -10,8 +10,10 @@ public:
 	double totalSum() const;//returns the total sum for payment
 	void addItem(Item);//add item to the set
 	void removeItem(Item);//remove item from the set
-
-						  //get and set functions
+	// getters & setters
+	string getName();
+	set<Item> getItems();
+	void setName(string);
 
 private:
 	string _name;

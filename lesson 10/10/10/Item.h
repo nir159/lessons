@@ -25,7 +25,8 @@ public:
 	void setName(string);
 	void setSerialNumber(string);
 	void setUnitNumber(double);
-	void Item::incCount();
+	void incCount();
+	void decCount();
 
 private:
 	string _name;

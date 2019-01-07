@@ -6,7 +6,7 @@ Customer::Customer() : _name("Default"){ }
 
 //returns the total sum for payment
 double Customer::totalSum() const {
-	int sum = 0;
+	float sum = 0;
 	set<Item>::iterator setIt;
 	for (setIt = _items.begin(); setIt != _items.end(); ++setIt)
 	{
@@ -17,13 +17,6 @@ double Customer::totalSum() const {
 
 //add item to the set
 void Customer::addItem(Item item) {
-	set<Item>::iterator setIt;
-	for (setIt = _items.begin(); setIt != _items.end(); ++setIt)
-	{
-		if ((*setIt) == item) {
-			item.incCount();
-		}
-	}
 	_items.insert(item);
 }
 

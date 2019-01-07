@@ -66,3 +66,7 @@ void Item::setUnitNumber(double newUnitNumber) {
 void Item::incCount() {
 	_count++;
 }
+
+void Item::decCount() {
+	_count--;
+}

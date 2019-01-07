@@ -18,6 +18,4 @@ public:
 private:
 	string _name;
 	set<Item> _items;
-
-
 };

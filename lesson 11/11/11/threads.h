@@ -4,6 +4,7 @@
 #include <iostream>
 #include<vector>
 #include <Windows.h>
+#include <thread>
 
 #define START 2 
 
@@ -35,13 +36,14 @@ void getPrimes(int begin, int end, vector<int>& primes) {
 	bool prime = true;
 	while (begin <= end) { // loop over the numbers
 		prime = true;
-		for (i = START; i <= begin / START; ++i)
+		i = START;
+		while (i <= begin / START && prime) // check if the current number is not prime if not prime leaves the loop
 		{
 			if (begin % i == 0)
 			{
-				prime = false;
-				break;
+				prime = false; // not prime
 			}
+			i++;
 		}
 		if (prime) {
 			primes.insert(primes.end(), begin);
@@ -51,7 +53,10 @@ void getPrimes(int begin, int end, vector<int>& primes) {
 }
 
 vector<int> callGetPrimes(int begin, int end) {
-
+	vector<int> primes;
+	std::thread getPrimes(getPrimes, begin, end, std::ref(primes));// creates the thread
+	getPrimes.join(); // wait until finished the function
+	return primes;
 }
 
 

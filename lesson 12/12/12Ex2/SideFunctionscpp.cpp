@@ -2,10 +2,12 @@
 
 int SideFunctions::inputNum() {
 	int choise;
-	while (!(std::cin >> choise)) {
+	std::cin >> choise;
+	while (!std::cin) {
 		std::cout << "Bad value!" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cin >> choise;
 	}
 	return choise;
 }
@@ -17,7 +19,7 @@ int SideFunctions::vFind(std::vector<std::string> names, std::string search) {
 			return (it - names.begin());// returns index of iterator
 		}
 	}
-	return 0;
+	return -1;
 }
 
 void SideFunctions::printVector(std::vector<std::string> names) {

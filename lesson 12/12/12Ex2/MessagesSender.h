@@ -8,12 +8,15 @@
 class MessagesSender {
 	std::vector<std::string> loggedUsers;
 	std::queue<std::string> adminMessages;
+	std::condition_variable queueIsEmpty;
+	std::mutex vector;
+	std::mutex queue;
 public:
 	//ctor, dtor
 	MessagesSender();
 	~MessagesSender();
 	//menu
 	void showMenu();
-	void readFile();
-	void sendMessages();
+	void readFile(std::future<void> futureObj);
+	void sendMessages(std::future<void> futureObj);
 };

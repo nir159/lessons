@@ -75,9 +75,26 @@ void Server::clientHandler(SOCKET clientSocket)
 {
 	try
 	{
-		int entry = Helper::getIntPartFromSocket(clientSocket, MAX_BYTES);
-		std::cout << "hi, my entry is : " << entry << std::endl;
-		std::this_thread::sleep_for(std::chrono::seconds(34242));
+		std::ifstream inputFile;
+		std::string fileContent;
+		// gets the username and adds to the users vector
+		std::string msg = Helper::getStringPartFromSocket(clientSocket, MAX_BYTES); // gets the message
+		int lengthName = std::atoi(msg.substr(3, 2).c_str()); // the length of the name
+		std::string name = msg.substr(5, lengthName);
+		users.push_back(name);
+
+		// send the info to the user
+		inputFile.open(FILE);
+		inputFile >> fileContent;
+		inputFile.close();
+
+		Helper::sendUpdateMessageToClient(clientSocket, fileContent, name, Helper::getNextUser(users, name), Helper::vFind(users, name));
+
+
+
+
+
+		std::this_thread::sleep_for(std::chrono::seconds(3615));
 		/*send(clientSocket, s.c_str(), s.size(), 0);  // last parameter: flag. for us will be 0.
 		recv(clientSocket, m, 4, 0);
 		if (std::this_thread::get_id() == users.front().get_id()) {
@@ -95,9 +112,9 @@ void Server::clientHandler(SOCKET clientSocket)
 			users.pop();
 			changeUser.unlock();
 		208:
-			changeUser.lock();
-			users.pop(); only
-			changeUser.unlock();
+			users.pop();
+			closesocket(clientSocket);
+
 		*/
 		
 

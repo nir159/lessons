@@ -103,3 +103,44 @@ void Helper::sendData(SOCKET sc, std::string message)
 		throw std::exception("Error while sending message to client");
 	}
 }
+
+/*
+Function will return the index of the string in the vector
+If string doesn't exists returns -1
+*/
+int Helper::vFind(std::vector<std::string> names, std::string search) {
+	std::vector<std::string>::iterator it;
+	for (it = names.begin(); it != names.end(); ++it) {
+		if ((*it).compare(search) == 0) {
+			return (it - names.begin());// returns index of iterator
+		}
+	}
+	return -1;
+}
+
+/*
+Function returns the next user after the current one
+In case there is no username returns an empty string
+*/
+std::string Helper::getNextUser(std::vector<std::string> names, std::string currentName) {
+	std::vector<std::string>::iterator it;
+	for (it = names.begin(); it != names.end(); ++it) {
+		if ((*it).compare(currentName) == 0) {
+			++it;
+			if (it != names.end()) {
+				return *it;// returns the next user
+			}
+		}
+	}
+	return "";
+}
+
+/*
+Function will print the vector
+*/
+void Helper::printVector(std::vector<std::string> names) {
+	std::vector<std::string>::iterator it;
+	for (it = names.begin(); it != names.end(); ++it) {
+		std::cout << *it << std::endl;
+	}
+}

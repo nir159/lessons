@@ -25,6 +25,9 @@ public:
 	static void sendData(SOCKET sc, std::string message);
 	static void sendUpdateMessageToClient(SOCKET sc, std::string fileContent, std::string currUser, std::string nextUser, int position);
 	static std::string getPaddedNumber(int num, int digits);
+	static int vFind(std::vector<std::string> names, std::string search);
+	static std::string getNextUser(std::vector<std::string> names, std::string currentName);
+	static void printVector(std::vector<std::string> names);
 
 private:
 	static char* Helper::getPartFromSocket(SOCKET sc, int bytesNum);

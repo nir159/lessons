@@ -1,7 +1,4 @@
 #include "Server.h"
-#include <exception>
-#include <iostream>
-#include <string>
 
 Server::Server()
 {
@@ -47,7 +44,7 @@ void Server::serve(int port)
 	while (true)
 	{
 		// the main thread is only accepting clients 
-		// and add then to the list of handlers
+		// and creates thread for each one
 		std::cout << "Waiting for client connection request" << std::endl;
 		accept();
 	}
@@ -60,6 +57,7 @@ void Server::accept()
 	// for the resolution of the function accept
 
 	// this accepts the client and create a specific socket from server to this client
+	// then creates new thread and add it to the threads queue - users
 	SOCKET client_socket = ::accept(_serverSocket, NULL, NULL);
 
 	if (client_socket == INVALID_SOCKET)
@@ -68,7 +66,8 @@ void Server::accept()
 	std::cout << "Client accepted. Server and client can speak" << std::endl;
 
 	// the function that handle the conversation with the client
-	clientHandler(client_socket);
+	std::thread newUser(&Server::clientHandler, this, client_socket);
+	newUser.detach();
 }
 
 
@@ -76,19 +75,32 @@ void Server::clientHandler(SOCKET clientSocket)
 {
 	try
 	{
-		std::string s = "Welcome! What is your name (4 bytes)? ";
-		send(clientSocket, s.c_str(), s.size(), 0);  // last parameter: flag. for us will be 0.
-
-		char m[5];
+		int entry = Helper::getIntPartFromSocket(clientSocket, MAX_BYTES);
+		std::cout << "hi, my entry is : " << entry << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(34242));
+		/*send(clientSocket, s.c_str(), s.size(), 0);  // last parameter: flag. for us will be 0.
 		recv(clientSocket, m, 4, 0);
-		m[4] = 0;
-		std::cout << "Client name is: " << m << std::endl;
-
-		s = "Bye";
-		send(clientSocket, s.c_str(), s.size(), 0);
+		if (std::this_thread::get_id() == users.front().get_id()) {
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+		}
+		else {
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+		}*/
+		/*
+		200:
+			
+			// moving the thread to the end of queue
+			changeUser.lock();
+			users.push(users.front());
+			users.pop();
+			changeUser.unlock();
+		208:
+			changeUser.lock();
+			users.pop(); only
+			changeUser.unlock();
+		*/
 		
-		// Closing the socket (in the level of the TCP protocol)
-		closesocket(clientSocket); 
+
 	}
 	catch (const std::exception& e)
 	{

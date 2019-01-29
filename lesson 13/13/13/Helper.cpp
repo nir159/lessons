@@ -22,18 +22,18 @@ int Helper::getMessageTypeCode(SOCKET sc)
 
 
 // send 204 message to specific client
-void Helper::sendUpdateMessageToClient(SOCKET sc, string fileContent, string currUser, string nextUser, int position)
+void Helper::sendUpdateMessageToClient(SOCKET sc, std::string fileContent, std::string currUser, std::string nextUser, int position)
 {
-	string res;
+	std::string res;
 
-	string code = std::to_string(MT_SERVER_UPDATE);
-	string currFileSize = getPaddedNumber(fileContent.size(), 5);
-	string currUserSize = getPaddedNumber(currUser.size(), 2);
-	string nextUserSize = getPaddedNumber(nextUser.size(), 2);
+	std::string code = std::to_string(MT_SERVER_UPDATE);
+	std::string currFileSize = getPaddedNumber(fileContent.size(), 5);
+	std::string currUserSize = getPaddedNumber(currUser.size(), 2);
+	std::string nextUserSize = getPaddedNumber(nextUser.size(), 2);
 
-	res = code + currFileSize + fileContent + currUserSize + currUser + nextUserSize + nextUser + to_string(position);
+	res = code + currFileSize + fileContent + currUserSize + currUser + nextUserSize + nextUser + std::to_string(position);
 
-	TRACE("Send update message to client: %d, currUser=%s, nextUser=%s, position=%d", sc, currUser.c_str(), nextUser.c_str(), position);
+	TRACE("Send update message to celint: %d, currUser=%s, nextUser=%s, position=%d", sc, currUser.c_str(), nextUser.c_str(), position);
 	sendData(sc, res);
 
 }
@@ -48,15 +48,15 @@ int Helper::getIntPartFromSocket(SOCKET sc, int bytesNum)
 
 // recieve data from socket according byteSize
 // returns the data as string
-string Helper::getStringPartFromSocket(SOCKET sc, int bytesNum)
+std::string Helper::getStringPartFromSocket(SOCKET sc, int bytesNum)
 {
 	char* s = getPartFromSocket(sc, bytesNum, 0);
-	string res(s);
+	std::string res(s);
 	return res;
 }
 
 // return string after padding zeros if necessary
-string Helper::getPaddedNumber(int num, int digits)
+std::string Helper::getPaddedNumber(int num, int digits)
 {
 	std::ostringstream ostr;
 	ostr << std::setw(digits) << std::setfill('0') << num;
@@ -75,7 +75,7 @@ char* Helper::getPartFromSocket(SOCKET sc, int bytesNum, int flags)
 {
 	if (bytesNum == 0)
 	{
-		return (char*)"";
+		return "";
 	}
 
 	char* data = new char[bytesNum + 1];

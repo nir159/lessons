@@ -4,9 +4,6 @@
 #include <string>
 #include <WinSock2.h>
 
-using namespace std;
-
-
 enum MessageType : byte
 {
 	MT_CLIENT_LOG_IN = 200,
@@ -24,13 +21,13 @@ public:
 
 	static int getMessageTypeCode(SOCKET sc);
 	static int getIntPartFromSocket(SOCKET sc, int bytesNum);
-	static string getStringPartFromSocket(SOCKET sc, int bytesNum);
+	static std::string getStringPartFromSocket(SOCKET sc, int bytesNum);
 	static void sendData(SOCKET sc, std::string message);
-	static void sendUpdateMessageToClient(SOCKET sc, string fileContent, string currUser, string nextUser, int position);
-	static string getPaddedNumber(int num, int digits);
+	static void sendUpdateMessageToClient(SOCKET sc, std::string fileContent, std::string currUser, std::string nextUser, int position);
+	static std::string getPaddedNumber(int num, int digits);
 
 private:
-	static char* getPartFromSocket(SOCKET sc, int bytesNum);
+	static char* Helper::getPartFromSocket(SOCKET sc, int bytesNum);
 	static char* getPartFromSocket(SOCKET sc, int bytesNum, int flags);
 
 };

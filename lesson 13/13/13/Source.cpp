@@ -11,7 +11,6 @@ int main()
 	{
 		WSAInitializer wsaInit;
 		Server myServer;
-
 		myServer.serve(8876);
 	}
 	catch (std::exception& e)

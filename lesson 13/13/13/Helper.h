@@ -28,6 +28,7 @@ public:
 	static int vFind(std::vector<std::string> names, std::string search);
 	static std::string getNextUser(std::vector<std::string> names, std::string currentName);
 	static void printVector(std::vector<std::string> names);
+	static std::string readFile(std::string name);
 
 private:
 	static char* Helper::getPartFromSocket(SOCKET sc, int bytesNum);

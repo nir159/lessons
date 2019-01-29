@@ -125,11 +125,9 @@ In case there is no username returns an empty string
 std::string Helper::getNextUser(std::vector<std::string> names, std::string currentName) {
 	std::vector<std::string>::iterator it;
 	for (it = names.begin(); it != names.end(); ++it) {
-		if ((*it).compare(currentName) == 0) {
-			++it;
-			if (it != names.end()) {
-				return *it;// returns the next user
-			}
+		if ((*it).compare(currentName) == 0 && it != names.begin()) {
+			--it;
+			return *it;
 		}
 	}
 	return "";
@@ -143,4 +141,16 @@ void Helper::printVector(std::vector<std::string> names) {
 	for (it = names.begin(); it != names.end(); ++it) {
 		std::cout << *it << std::endl;
 	}
+}
+
+std::string Helper::readFile(std::string name) {
+	std::ifstream inputFile;
+	std::string fileContent;
+	inputFile.open(name);
+	inputFile.seekg(0, std::ios::end);
+	fileContent.reserve(inputFile.tellg());
+	inputFile.seekg(0, std::ios::beg);
+	fileContent.assign((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
+	inputFile.close();
+	return fileContent;
 }

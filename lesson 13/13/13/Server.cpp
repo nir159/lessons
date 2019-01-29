@@ -75,8 +75,6 @@ void Server::clientHandler(SOCKET clientSocket)
 {
 	try
 	{
-		std::ifstream inputFile;
-		std::string fileContent;
 		// gets the username and adds to the users vector
 		std::string msg = Helper::getStringPartFromSocket(clientSocket, MAX_BYTES); // gets the message
 		int lengthName = std::atoi(msg.substr(3, 2).c_str()); // the length of the name
@@ -84,11 +82,7 @@ void Server::clientHandler(SOCKET clientSocket)
 		users.push_back(name);
 
 		// send the info to the user
-		inputFile.open(FILE);
-		inputFile >> fileContent;
-		inputFile.close();
-
-		Helper::sendUpdateMessageToClient(clientSocket, fileContent, name, Helper::getNextUser(users, name), Helper::vFind(users, name));
+		Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name));
 
 
 

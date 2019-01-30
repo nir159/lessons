@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <WinSock2.h>
+#include <queue>
 
 enum MessageType : byte
 {
@@ -29,6 +30,8 @@ public:
 	static std::string getNextUser(std::vector<std::string> names, std::string currentName);
 	static void printVector(std::vector<std::string> names);
 	static std::string readFile(std::string name);
+	static void updateFile(std::string fileName, std::queue<std::string> data);
+	static int getLastVector(std::vector<std::string> names);
 
 private:
 	static char* Helper::getPartFromSocket(SOCKET sc, int bytesNum);

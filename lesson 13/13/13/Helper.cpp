@@ -143,6 +143,9 @@ void Helper::printVector(std::vector<std::string> names) {
 	}
 }
 
+/*
+Function reads the data file and returns the content
+*/
 std::string Helper::readFile(std::string name) {
 	std::ifstream inputFile;
 	std::string fileContent;
@@ -153,4 +156,33 @@ std::string Helper::readFile(std::string name) {
 	fileContent.assign((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
 	inputFile.close();
 	return fileContent;
+}
+
+/*
+Function update the data in file
+*/
+void Helper::updateFile(std::string fileName, std::queue<std::string> data) {
+	std::ofstream outputFile(fileName, std::ios::out);
+	while (!data.empty()) {
+		outputFile << data.front();
+		data.pop();
+	}
+	outputFile.close();
+}
+
+/*
+Function will return the index of the last one in a vector
+if the vector is empty will return -1
+*/
+int Helper::getLastVector(std::vector<std::string> names) {
+	std::vector<std::string>::iterator it;
+	if (!names.empty()) {
+		it = names.begin();
+		while (it != names.end()) {
+			++it;
+		}
+		--it;
+		return (it - names.begin());
+	}
+	return -1;
 }

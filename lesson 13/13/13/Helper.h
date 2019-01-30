@@ -32,6 +32,8 @@ public:
 	static std::string readFile(std::string name);
 	static void updateFile(std::string fileName, std::queue<std::string> data);
 	static int getLastVector(std::vector<std::string> names);
+	static bool invalidChar(char ch);
+	static bool endOfBuffer(std::string buffer);
 
 private:
 	static char* Helper::getPartFromSocket(SOCKET sc, int bytesNum);

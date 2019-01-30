@@ -186,3 +186,23 @@ int Helper::getLastVector(std::vector<std::string> names) {
 	}
 	return -1;
 }
+
+/*
+This function is used to strip all the unicode from string
+*/
+bool Helper::invalidChar(char ch)
+{
+	return !(ch >= 0 && ch <128);
+}
+
+/*
+Function returns true if the string contains any unicode letters
+*/
+bool Helper::endOfBuffer(std::string buffer) {
+	for (char& c : buffer) {
+		if (Helper::invalidChar(c)) {
+			return true;
+		}
+	}
+	return false;
+}

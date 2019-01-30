@@ -1,4 +1,4 @@
-#include "Server.h"
+﻿#include "Server.h"
 
 Server::Server()
 {
@@ -76,13 +76,12 @@ void Server::clientHandler(SOCKET clientSocket)
 	try
 	{
 		// lock is used to make the line wait
-		std::unique_lock<std::mutex> first(firstInLine);
+		std::unique_lock<std::mutex> first(firstInLine, std::defer_lock);
 		// gets the username and adds to the users vector
 		std::string msg = Helper::getStringPartFromSocket(clientSocket, MAX_BYTES); // gets the message
 		int messageNumber = 200, dataSize = 0, lengthName = std::atoi(msg.substr(3, 2).c_str()); // the length of the name
 		std::string name = msg.substr(5, lengthName);
 		users.push_back(name);
-
 		// send the info to the user
 		Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name)+1);
 		
@@ -92,50 +91,41 @@ void Server::clientHandler(SOCKET clientSocket)
 				messageNumber = std::atoi(msg.substr(0, 3).c_str());
 				switch (messageNumber) {
 				case UPDATE:
-
-					std::cout << "the full msg: " << msg;
 					// this part updates the file
 					dataSize = std::atoi(msg.substr(3, 5).c_str());
-					messages.push(msg.substr(8, 10).c_str());
-					messages.front().erase(std::remove(messages.front().begin(), messages.front().end(), '='), messages.front().end());
+					messages.push(msg.substr(8, msg.length()-8).c_str());
+					while (!Helper::endOfBuffer(msg)) {
+						msg = Helper::getStringPartFromSocket(clientSocket, MAX_BYTES); // gets the message
+						messages.push(msg);
+					}
+					// strips the unicode letters from the string
+					messages.back().erase(remove_if(messages.back().begin(), messages.back().end(), Helper::invalidChar), messages.back().end());
 					Helper::updateFile(FILE, messages);
 					// clears the messages queue
 					while (!messages.empty()) {
 						messages.pop();
 					}
-
-
-
-
-
-
 					firstIsDone.notify_all();
+					Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name) + 1);
 					break;
 				case FINISHED:
-
-
-
-
-
-
 					// this part updates the file
 					dataSize = std::atoi(msg.substr(3, 5).c_str());
-
-					messages.push(msg.substr(8, 10).c_str());
+					messages.push(msg.substr(8, msg.length()-8).c_str());
+					while (!Helper::endOfBuffer(msg)) {
+						msg = Helper::getStringPartFromSocket(clientSocket, MAX_BYTES); // gets the message
+						messages.push(msg);
+					}
+					// strips the unicode letters from the string
+					messages.front().erase(remove_if(messages.front().begin(), messages.front().end(), Helper::invalidChar), messages.front().end());
 					Helper::updateFile(FILE, messages);
 					// clears the messages queue
 					while (!messages.empty()) {
 						messages.pop();
 					}
-
-
-
-
-
-
-
 					std::iter_swap(users.begin(), users.begin() + Helper::getLastVector(users));
 					firstIsDone.notify_all();
+					Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name) + 1);
 					break;
 				case EXIT:
 					users.erase(users.begin() + Helper::vFind(users, name));
@@ -146,7 +136,6 @@ void Server::clientHandler(SOCKET clientSocket)
 					std::cout << "Command is not associated with the protocol" << std::endl;
 					exit(1);
 				}
-				Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name) + 1);
 			}
 			else {
 				firstIsDone.wait(first);

@@ -75,8 +75,6 @@ void Server::clientHandler(SOCKET clientSocket)
 {
 	try
 	{
-		// lock is used to make the line wait
-		std::unique_lock<std::mutex> first(firstInLine, std::defer_lock);
 		// gets the username and adds to the users vector
 		std::string msg = Helper::getStringPartFromSocket(clientSocket, MAX_BYTES); // gets the message
 		int messageNumber = 200, dataSize = 0, lengthName = std::atoi(msg.substr(3, 2).c_str()); // the length of the name
@@ -117,13 +115,14 @@ void Server::clientHandler(SOCKET clientSocket)
 						messages.push(msg);
 					}
 					// strips the unicode letters from the string
-					messages.front().erase(remove_if(messages.front().begin(), messages.front().end(), Helper::invalidChar), messages.front().end());
+					messages.back().erase(remove_if(messages.back().begin(), messages.back().end(), Helper::invalidChar), messages.back().end());
 					Helper::updateFile(FILE, messages);
 					// clears the messages queue
 					while (!messages.empty()) {
 						messages.pop();
 					}
-					std::iter_swap(users.begin(), users.begin() + Helper::getLastVector(users));
+					// move the user to the end of line
+					std::rotate(users.begin(), users.end() - Helper::getLastVector(users), users.end());
 					firstIsDone.notify_all();
 					Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name) + 1);
 					break;
@@ -138,25 +137,11 @@ void Server::clientHandler(SOCKET clientSocket)
 				}
 			}
 			else {
+				std::unique_lock<std::mutex> first(firstInLine);
 				firstIsDone.wait(first);
 				Helper::sendUpdateMessageToClient(clientSocket, Helper::readFile(FILE), name, Helper::getNextUser(users, name), Helper::vFind(users, name) + 1);
 			}
 		} while (messageNumber != EXIT);
-		/*
-		204:
-			put data in queue:
-				get each time different part (500) and add to queue until reached end of buffer
-			update file
-		207:
-			put data in queue
-			update file
-			std::iter_swap(v.begin(),v.begin()+Helper::getLastVector(users));
-		208:
-			users.erase(users.begin()+Helper::vFind(users, name));
-			closesocket(clientSocket);
-			send 101
-
-		*/
 	}
 	catch (const std::exception& e)
 	{

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <condition_variable>
 #include <WinSock2.h>
 #include <Windows.h>
 #include "Helper.h"
